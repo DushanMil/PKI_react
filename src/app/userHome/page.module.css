@@ -1,0 +1,42 @@
+.carouselContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 20px 0; 
+    height: 70vh;
+    margin-top: -50px;
+    margin-bottom: 70px;
+}
+
+.carouselSlide {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center;
+    gap: 5px;  
+    transition: transform 1s ease-in-out; 
+    width: 300vw;  
+}
+
+.carouselSlide img {
+    width: 500px;  
+    height: 300px;  
+    object-fit: cover;  
+    border-radius: 2px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.carouselSlide img:hover {
+    transform: scale(1.05);
+} 
+
+.title {
+    font-family: 'Montserrat';
+    font-size: 30px;
+    text-align: center;
+    font-weight: 300;
+    color: #c2c2c2;
+    margin-top: 60px;
+}

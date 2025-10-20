@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -10,61 +10,50 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  let users = [
+  let initialUsers = [
     { username: "dusan", password: "delecar123"},
     { username: "rados", password: "bajic321" }
   ]
 
-  let userData = [
+  let initialUserData = [
     { username: "dusan", password: "delecar123", name: "Dusan", surname: "Milovanovic", address: "Oslobodjenja 7", phone: "063 17 300 22" },
     { username: "rados", password: "bajic321", name: "Rados", surname: "Bajic", address: "Kukljin bb", phone: "067 804 557" }
   ]
+  const [users, setUsers] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   const router = useRouter();
+
+  useEffect(() => {
+    // Check if userData exists in localStorage
+    if (localStorage.getItem("userData")) {
+      setUsers(JSON.parse(localStorage.getItem("users")));
+      setUserData(JSON.parse(localStorage.getItem("userData")));
+    }
+    else {
+      // Users don't exist in localStorage, so add them
+      localStorage.setItem("users", JSON.stringify(initialUsers));
+      localStorage.setItem("userData", JSON.stringify(initialUserData));
+      setUsers(initialUsers);
+      setUserData(initialUserData);
+    }
+
+    // Clear all other items in localstorage
+    const keysToKeep = ["users", "userData"];
+    Object.keys(localStorage).forEach((key: string) => {
+      if (!keysToKeep.includes(key)) {
+        localStorage.removeItem(key);
+      }
+    });
+  }, []);
 
   function loginUser(e) {
     e.preventDefault();
 
-    // ako sam upamtila tog usera sa izmenjenim podacima
-    const storedUser = localStorage.getItem(username);
-    if(storedUser) {
-      try {
-        const u = JSON.parse(storedUser);    
-        if (u.username === username && u.password === password) {  
-
-          console.log("to je taj " + username + " " + password)
-
-          localStorage.setItem("username", u.username);
-          localStorage.setItem("password", u.password);
-
-          localStorage.setItem("name", u.name);
-          localStorage.setItem("surname", u.surname);
-          localStorage.setItem("address", u.address);
-          localStorage.setItem("phone", u.phone);
-
-          router.push("/userHome"); 
-        } else {
-          Swal.fire({
-            text: "Pogrešni podaci.",
-            icon: "warning",
-            iconColor: "#959595",
-            timer: 2000,
-            timerProgressBar: true,
-            showConfirmButton: false
-          });
-          return;
-        }
-      } catch(error) {
-        console.log("Error parsing user data:", error);
-      } 
-      return;
-    }  
-    
-    // ako useru nisu menjani podaci: 
+    // Find the user in users array
     const userExists = users.find(user => user.username === username && user.password === password);
 
-    if (userExists) {
-      //localStorage.clear();        
+    if (userExists) {       
 
       const userDetails = userData.find(user => user.username === username && user.password === password);
 
@@ -76,10 +65,9 @@ export default function LoginPage() {
       localStorage.setItem("address", userDetails.address);
       localStorage.setItem("phone", userDetails.phone);
 
-      router.push("/userHome"); 
+      router.push("/userHome");
 
     } else {
-
         Swal.fire({
           text: "Pogrešni podaci.",
           icon: "warning",
@@ -90,6 +78,12 @@ export default function LoginPage() {
         });
       
     }
+  }
+
+  function changePassword(e) {
+    e.preventDefault();
+    localStorage.removeItem('usernameForPasswordChange');
+    router.push("/changePasswordUsername");
   }
 
   return (
@@ -126,7 +120,7 @@ export default function LoginPage() {
           </div>
 
           <button className="btn" type="submit" onClick={loginUser}>Login</button>
-          <button className="btn" type="submit" onClick={loginUser}>Promena lozinke</button>
+          <button className="btn" type="submit" onClick={changePassword}>Promena lozinke</button>
         
         </div>
       </main> 
