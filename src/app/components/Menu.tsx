@@ -6,11 +6,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import Image from "next/image";
 import ProfilePanel from './ProfilePanel';
 import NotificationsPanel from './NotificationsPanel';
+import ShoppingCartPanel from './ShoppingCartPanel';
 
 const Menu = () => {
 
     const [userDetailsVisible, setUserDetailsVisible] = useState(false);
     const [notificationsVisible, setNotificationsVisible] = useState(false);
+    const [shoppingCartVisible, setShoppingCartVisible] = useState(false);
     const [userNotificationItems, setUserNotificationItems] = useState(0) 
     const router = useRouter();
 
@@ -25,6 +27,10 @@ const Menu = () => {
 
     function toggleNotifications() {
         setNotificationsVisible(!notificationsVisible);
+    }
+
+    function toggleShoppingCart() {
+        setShoppingCartVisible(!shoppingCartVisible);
     }
 
     function logout() {
@@ -50,7 +56,7 @@ const Menu = () => {
                         <Image src="/Alarm.png" alt="Alarm" width={70} height={70} />
                         <span className={styles.badge}>{userNotificationItems}</span>
                     </span>
-                    <span className={styles.icon}>
+                    <span className={styles.icon} onClick={toggleShoppingCart}>
                         <Image src="/Shopping cart.png" alt="Shopping cart" width={70} height={70} />
                     </span>
                     <span className={styles.icon} onClick={toggleUserDetails}>
@@ -90,6 +96,7 @@ const Menu = () => {
 
             { userDetailsVisible && <ProfilePanel onToggleUserDetails={toggleUserDetails}/> }
             { notificationsVisible && <NotificationsPanel onToggleNotifications={toggleNotifications}/> }
+            { shoppingCartVisible && <ShoppingCartPanel onToggleShoppingCart={toggleShoppingCart}/> }
         </header>
     );
 };

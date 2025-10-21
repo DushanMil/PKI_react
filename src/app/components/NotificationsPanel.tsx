@@ -6,22 +6,15 @@ import { useRouter } from "next/navigation";
 
 export default function NotificationsPanel({ onToggleNotifications }: { onToggleNotifications: () => void }) {
   // Notifications pannel, similar to ProfilePanel
-  
-  // logged in user
-  const [username, setUsername] = useState("");
 
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
-  const [userNotifications, setUserNotifications] = useState<AppNotification[]>([]);
 
   useEffect(() => {
     // Get user data from localStorage
     // get notifications from storage for logged in user
     const storedUsername = localStorage.getItem("username")
-    setUsername(storedUsername)
     setNotifications(JSON.parse(localStorage.getItem("notifications")).filter(notif => notif.username === storedUsername) || [])
   }, []);
-  
-  const router = useRouter();
 
   return (
     <div className={styles.profileContainer}>

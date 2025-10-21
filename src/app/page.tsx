@@ -26,6 +26,13 @@ export default function LoginPage() {
     { username: "dusan", title: "Neverovatno niske cene:", message: "U podrumu nađena crvotocina koja vodi u 2018. godinu. Nije davno ali je sve bilo mnogo jeftinije", image: "money.png" },
     { username: "dusan", title: "Potvrđeno zakazivanje događaja", message: "Događaj: Veridba kod bata Mile je uspešno zakazan.", image: "message.png" },
   ]
+  let initialShoppingCart = [
+    { username: "dusan", location: "Požarevac", guests: "700", title: "Vlaška svadba", image: "vlaska.png", state: ""},
+    { username: "dusan", location: "Svilajnac", guests: "300", title: "BG Žurka", image: "bgZurka.png", state: ""},
+    { username: "rados", location: "Trstenik", guests: "700", title: "Sin dragan se ženi", image: "trstenik.png", state: ""},
+    { username: "dusan", location: "Petlovac", guests: "500", title: "Veridba", image: "petlovac.png", state: ""},
+    { username: "dusan", location: "Beč", guests: "900", title: "Koncert DM", image: "dragana.png", state: ""},
+  ]
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState([]);
 
@@ -49,9 +56,13 @@ export default function LoginPage() {
     if (!localStorage.getItem("notifications")) {
       localStorage.setItem("notifications", JSON.stringify(initialNotifications));
     }
+    // Add offers data
+    if (!localStorage.getItem("shoppingCart")) {
+      localStorage.setItem("shoppingCart", JSON.stringify(initialShoppingCart));
+    }
 
     // Clear all other items in localstorage
-    const keysToKeep = ["users", "userData", "notifications"];
+    const keysToKeep = ["users", "userData", "notifications", "shoppingCart"];
     Object.keys(localStorage).forEach((key: string) => {
       if (!keysToKeep.includes(key)) {
         localStorage.removeItem(key);
