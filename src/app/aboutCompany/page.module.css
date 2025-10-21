@@ -1,0 +1,31 @@
+.container {
+    background-color: #DBF9FE;
+}
+
+.main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    align-items: center;
+}
+
+.main p {
+  font-size: 24px;
+  font-family: Roboto;
+  padding: 5px 0px;
+}
+
+.title {
+  font-size: 24px;
+  font-family: Roboto;
+  padding: 5px 0px;
+  font-weight: bold;
+}
+
+.banner {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}

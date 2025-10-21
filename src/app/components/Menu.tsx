@@ -86,7 +86,7 @@ const Menu = () => {
                 </p>
 
                 <p className={styles.navItem}>
-                    <a href="#">O nama</a>
+                    <a href="/aboutCompany">O nama</a>
                 </p>
             </div>
             <div className={styles.navRight}>
