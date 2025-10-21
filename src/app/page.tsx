@@ -19,6 +19,13 @@ export default function LoginPage() {
     { username: "dusan", password: "delecar123", name: "Dusan", surname: "Milovanovic", address: "Oslobodjenja 7", phone: "063 17 300 22" },
     { username: "rados", password: "bajic321", name: "Rados", surname: "Bajic", address: "Kukljin bb", phone: "067 804 557" }
   ]
+  let initialNotifications = [
+    { username: "dusan", title: "Novo u Kafani kod Španca:", message: "Uz prethodno organizovane dve proslave trecu dobijate gratis", image: "bag.png" },
+    { username: "dusan", title: "Potvrđeno zakazivanje događaja", message: "Događaj: Vlaška svadba je uspešno zakazan.", image: "message.png" },
+    { username: "rados", title: "Craaaazy title:", message: "sanity check", image: "money.png" },
+    { username: "dusan", title: "Neverovatno niske cene:", message: "U podrumu nađena crvotocina koja vodi u 2018. godinu. Nije davno ali je sve bilo mnogo jeftinije", image: "money.png" },
+    { username: "dusan", title: "Potvrđeno zakazivanje događaja", message: "Događaj: Veridba kod bata Mile je uspešno zakazan.", image: "message.png" },
+  ]
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState([]);
 
@@ -26,6 +33,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     // Check if userData exists in localStorage
+    // This is needed for change password functionality
     if (localStorage.getItem("userData")) {
       setUsers(JSON.parse(localStorage.getItem("users")));
       setUserData(JSON.parse(localStorage.getItem("userData")));
@@ -37,9 +45,13 @@ export default function LoginPage() {
       setUsers(initialUsers);
       setUserData(initialUserData);
     }
+    // Add notifications data
+    if (!localStorage.getItem("notifications")) {
+      localStorage.setItem("notifications", JSON.stringify(initialNotifications));
+    }
 
     // Clear all other items in localstorage
-    const keysToKeep = ["users", "userData"];
+    const keysToKeep = ["users", "userData", "notifications"];
     Object.keys(localStorage).forEach((key: string) => {
       if (!keysToKeep.includes(key)) {
         localStorage.removeItem(key);

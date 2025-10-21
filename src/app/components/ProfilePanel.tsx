@@ -39,8 +39,6 @@ export default function ProfilePanel({ onToggleUserDetails }: { onToggleUserDeta
 
   function changeUserAttribute(attribute, value) {
     setUserDetails({ ...userDetails, [attribute]: value });
-    console.log(username)
-    console.log(userData)
 
     const userToUpdate = users.find(user => user.username === username);
     const userDataToUpdate = userData.find(user => user.username === username);
@@ -48,7 +46,6 @@ export default function ProfilePanel({ onToggleUserDetails }: { onToggleUserDeta
       userToUpdate[attribute] = value;
       setUsername(value);
     }
-    console.log(userDataToUpdate)
     userDataToUpdate[attribute] = value;
     setUsers([...users]);
     setUserData([...userData]);

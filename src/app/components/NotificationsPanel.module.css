@@ -1,0 +1,69 @@
+.profileContainer {
+  position: relative;
+  height: 100%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.4;
+  z-index: 10;
+}
+
+.sidePanel {
+  position: fixed;
+  top: 80px;
+  right: 0px;
+  width: 35%;
+  bottom: 0px;
+  background-color: #E0A82F;
+  z-index: 11;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.notifContainer {
+  text-align: center;
+  background-color: #BB271A;
+  padding: 15px 10px;
+  margin: 25px 0;
+  border-radius: 30px;
+  display: flex;
+  gap: 10px;
+
+}
+
+.notifContainer img {
+  width: 90px;
+  height: 90px;
+}
+
+.notifContainer p {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 15px;
+}
+
+.profileActions {
+  align-items: center;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.btn {
+  background-color: #BB271A;
+  color: white;
+  border-radius: 30px;
+  border: none;
+  width: 160px;
+  height: 50px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}
