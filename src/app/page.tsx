@@ -58,12 +58,7 @@ export default function LoginPage() {
       const userDetails = userData.find(user => user.username === username && user.password === password);
 
       localStorage.setItem("username", username);
-      localStorage.setItem("password", password);
-
-      localStorage.setItem("name", userDetails.name);
-      localStorage.setItem("surname", userDetails.surname);
-      localStorage.setItem("address", userDetails.address);
-      localStorage.setItem("phone", userDetails.phone);
+      localStorage.setItem("loggedInUserDetails", JSON.stringify(userDetails));
 
       router.push("/userHome");
 

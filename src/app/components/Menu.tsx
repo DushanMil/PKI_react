@@ -1,17 +1,23 @@
 'use client'
 
-import React from 'react';
+import { useState } from 'react';
 import styles from "./Menu.module.css";
 import { usePathname, useRouter } from 'next/navigation';
 import Image from "next/image";
+import ProfilePanel from './ProfilePanel';
 
 const Menu = () => {
 
-    const pathname = usePathname();
+    const [userDetailsVisible, setUserDetailsVisible] = useState(false);
     const router = useRouter();
 
     const goHome = () => {
         router.push("/userHome");
+    }
+
+    // here logic is needed for slide-in panels from the right
+    function toggleUserDetails() {
+        setUserDetailsVisible(!userDetailsVisible);
     }
 
     return (
@@ -26,7 +32,7 @@ const Menu = () => {
                     <span className={styles.icon}>
                         <Image src="/Shopping cart.png" alt="Shopping cart" width={70} height={70} />
                     </span>
-                    <span className={styles.icon}>
+                    <span className={styles.icon} onClick={toggleUserDetails}>
                         <Image src="/Test Account.png" alt="Test Account" width={70} height={70} />
                     </span>
                 </div>
@@ -35,7 +41,7 @@ const Menu = () => {
             {/* Navigation bar */}
             <div className={styles.navBar}>
                 <p className={styles.navItem} onClick={goHome}>
-                    <a href="#">Naslovna</a>
+                    <a href="/userHome">Naslovna</a>
                 </p>
 
                 <p className={styles.navItem}>
@@ -57,6 +63,8 @@ const Menu = () => {
                 <Image src="/serbia_figma.png" alt="Serbian flag" width={45} height={35} className={styles.flag} />
                 <Image src="/uk_figma.png" alt="UK flag" width={45} height={35} className={styles.flag} />
             </div>
+
+            { userDetailsVisible && <ProfilePanel onToggleUserDetails={toggleUserDetails}/> }
         </header>
     );
 };
