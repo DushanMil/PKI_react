@@ -75,7 +75,7 @@ const Menu = () => {
                 </p>
 
                 <p className={styles.navItem}>
-                    <a href="#">Događaji</a>
+                    <a href="/events">Događaji</a>
                 </p>
 
                 <Image src="/logo.png" alt="Kafana Kod Španca" width={300} height={250} className={styles.logo} />
