@@ -33,6 +33,27 @@ export default function LoginPage() {
     { username: "dusan", location: "Petlovac", guests: "500", title: "Veridba", image: "petlovac.png", state: ""},
     { username: "dusan", location: "Beč", guests: "900", title: "Koncert DM", image: "dragana.png", state: ""},
   ]
+  // Sample data for offers, to have something to show
+  let initialOffers = [
+    { title: "Svadba", 
+      text: "Proslavite početak zajedničkog života u prelepom ambijentu Kafane kod Španca. Gosti će biti oduševljeni neverovatnom ponudom hrane i pića", 
+      price: "50", image: "veridba_carousel.jpg", icon: "wedding.png", comments: []},
+    { title: "Žurka", 
+      text: "Nezaboravan provod za mlade sa tehno muzikom i jeftinim picem ... ", 
+      price: "20", image: "zurka_carousel.jpg", icon: "party.png", comments: []},
+    { title: "Vlaška svadba", 
+      text: "Kao svadba samo mnogo jaca jer ima pevaljku, masni hranu, svadbarski kupu, trubace, bacanje para i ccigane", 
+      price: "30", image: "vlaska_carousel.jpg", icon: "vlach.png", comments: []},
+    { title: "Koncert DM", 
+      text: "Provedite nezaboravno vece na koncertu Dragane Mirkovic. U separeu vac ceka pice vase je samo da dodjete.", 
+      price: "100", image: "dragana_carousel.jpg", icon: "party.png", comments: []},
+    { title: "nesto nesto", 
+      text: "Proslavite početak zajedničkog života u prelepom ambijentu Kafane kod Španca. Gosti će biti oduševljeni neverovatnom ponudom hrane i pića", 
+      price: "100", image: "veridba_carousel.jpg", icon: "party.png", comments: []},
+    { title: "nesto drugo", 
+      text: "Proslavite početak zajedničkog života u prelepom ambijentu Kafane kod Španca. Gosti će biti oduševljeni neverovatnom ponudom hrane i pića", 
+      price: "50", image: "veridba_carousel.jpg", icon: "party.png", comments: []},
+  ]
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState([]);
 
@@ -56,13 +77,17 @@ export default function LoginPage() {
     if (!localStorage.getItem("notifications")) {
       localStorage.setItem("notifications", JSON.stringify(initialNotifications));
     }
-    // Add offers data
+    // Add shopping cart items data
     if (!localStorage.getItem("shoppingCart")) {
       localStorage.setItem("shoppingCart", JSON.stringify(initialShoppingCart));
     }
+    // Add offers data
+    if (!localStorage.getItem("offers")) {
+      localStorage.setItem("offers", JSON.stringify(initialOffers));
+    }
 
     // Clear all other items in localstorage
-    const keysToKeep = ["users", "userData", "notifications", "shoppingCart"];
+    const keysToKeep = ["users", "userData", "notifications", "shoppingCart", "offers"];
     Object.keys(localStorage).forEach((key: string) => {
       if (!keysToKeep.includes(key)) {
         localStorage.removeItem(key);

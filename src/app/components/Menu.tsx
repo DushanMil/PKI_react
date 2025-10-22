@@ -82,7 +82,7 @@ const Menu = () => {
                 <p>Placeholder</p>
 
                 <p className={styles.navItem}>
-                    <a href="#">Ponuda</a>
+                    <a href="/offers">Ponuda</a>
                 </p>
 
                 <p className={styles.navItem}>

@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from "./page.module.css";
 import Menu from '../components/Menu';
-import Image from "next/image";
 
 interface Slide {
   id: number;

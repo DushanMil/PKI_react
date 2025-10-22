@@ -18,14 +18,13 @@
   padding: 40px;
   width: 90%;
   max-width: 1200px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .carouselContent {
-  background-color: #E0A82F; /* yellow background */
+  background-color: #E0A82F;
   display: flex;
   justify-content: center;
   align-items: flex-start;
