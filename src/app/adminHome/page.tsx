@@ -27,7 +27,8 @@ export default function AdminPage() {
   const handleConfirm = (index: number) => {
     const updated = [...confirmedEvents];
     updated[index].state = 'accepted';
-    setConfirmedEvents(updated);
+    const filtered = updated.filter((item: ShoppingCartItem) => item.state === 'confirmed');
+    setConfirmedEvents(filtered);
     const allItems = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
     const updatedAll = allItems.map((i: ShoppingCartItem) =>
       i.username === updated[index].username &&
@@ -68,7 +69,7 @@ export default function AdminPage() {
         username: updated.username,
         title: "Odbijeno zakazivanje događaja",
         message: "Događaj: " + updated.title + " je odbijen.",
-        image: updated.image,
+        image: "message.png",
       }
     }
     else if (action == "confirm") {
@@ -76,7 +77,7 @@ export default function AdminPage() {
         username: updated.username,
         title:  "Uspesno zakazivanje događaja",
         message: "Događaj: " + updated.title + " je uspešno zakazan.",
-        image: updated.image,
+        image: "message.png",
       }
     }
 
@@ -100,7 +101,7 @@ export default function AdminPage() {
             <Image src="/logout.png" alt="Logout" width={50} height={50} />
         </span>
         <h1 className={styles.barTitle}>Kafana kod Španca</h1>
-        <button className={styles.addButton} onClick={() => router.push('/add-event')}>
+        <button className={styles.addButton} onClick={() => router.push('/adminAddEvent')}>
           Dodaj događaj
         </button>
       </div>

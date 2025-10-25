@@ -4,10 +4,14 @@
   padding: 0;
   margin: 0;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* TOP BAR */
 .topBar {
+  width: 100%;
   background-color: #E0A82F;
   display: flex;
   justify-content: space-between;
@@ -29,7 +33,6 @@
   text-align: center;
   color: black;
   flex: 1;
-  margin-left: 30px;
 }
 
 .addButton {
@@ -48,33 +51,19 @@
 }
 
 /* MAIN LIST */
-.listContainer {
-  display: flex;
-  flex-direction: column; /* stack items vertically */
-  align-items: center; /* center horizontally */
-  padding: 30px 0; /* optional top/bottom padding */
-  min-height: calc(100vh - 60px); /* subtract top bar height if needed */
-  gap: 5px; /* space between items */
-}
-
-.noEvents {
-  text-align: center;
-  font-style: italic;
-  color: #444;
-}
-
 .eventItem {
   display: flex;
+  align-items: center; /* center horizontally */
   justify-content: flex-start;
-  align-items: flex-start;
   background: #E0A82F;
   margin-bottom: 10px;
+  margin-top: 20px;
   padding: 16px;
   padding-bottom: 25px;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   gap: 20px;
-  width: 450;
+  width: 550px;
 }
 
 /* Columns layout */
@@ -85,26 +74,52 @@
   color: black;
 }
 
+.legendColumn p {
+  padding: 6px;
+}
+
 .valueColumn {
   flex: 0 0 40%;
-  text-align: right;
+  text-align: left;
   color: black;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.legendColumn p, .valueColumn p {
-  margin-bottom: 5px;
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
+.inputRow input {
+  background: #F1C461;
+}
+
+.inputRow select {
+  background: #F1C461;
+}
+
+.valueColumn input,
+.valueColumn select {
+  flex: 1;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  font-size: 0.9rem;
+}
+
+/* Buttons column */
 .buttonsColumn {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: auto;
-  gap: 20px;
+  gap: 10px;
 }
 
-/* Buttons */
 .actionButton {
   background-color: #BB271A;
   color: black;

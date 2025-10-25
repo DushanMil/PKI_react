@@ -15,6 +15,4 @@ interface EventItem {
   icon: string;
   location: string;
   comments: CommentItem[];
-
-  [Symbol.iterator](): Iterator<any>;
 }
