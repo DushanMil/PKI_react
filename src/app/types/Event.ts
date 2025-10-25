@@ -1,5 +1,6 @@
 
 interface CommentItem {
+  id: string;
   user: string;
   image: string;
   stars: number;

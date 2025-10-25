@@ -1,102 +1,289 @@
-.profileContainer {
+/* page.module.css */
+
+/* PAGE: yellow background, padding & margin, no border-radius */
+.container {
+  background-color: #E0A82F; /* yellow background */
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  margin: 0;
+  color: #111;
+  margin-top: 30px;
+  margin-right: 80px;
+  margin-left: 80px;
+  margin-bottom: 30px;;
+}
+
+/* Title at the top */
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0px 0 20px 0;
+  text-align: center;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   position: relative;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  opacity: 0.4;
-  z-index: 10;
+/* Close button (X in top-right corner) */
+.closeBtn {
+  background: none;
+  border: none;
+  color: #111;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
 }
 
-.sidePanel {
-  position: fixed;
-  top: 80px;
-  right: 0px;
-  width: 35%;
-  height: 100%;
-  background-color: #E0A82F;
-  z-index: 11;
-  padding: 10px;
+/* Main layout: left image, center text/form, right comments */
+.contentRow {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 20px;
+}
+
+/* left big image */
+.leftColumn {
+  flex: 0 0 20%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.mainImage {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* center column with text/price/button and add-comment */
+.centerColumn {
+  flex: 0 0 35%;
   display: flex;
   flex-direction: column;
-  margin: auto;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+/* right comments column */
+.rightColumn {
+  flex: 0 0 45%; /* fixed width for right column */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 300px; /* ensures it never stretches */
+  overflow-x: hidden; /* prevents content from going off-screen */
+  min-width: 0; /* important in flex containers */
+  box-sizing: border-box;
+}
+
+/* offer text / price / button */
+.offerBody {
+  background: transparent;
+  padding: 0;
+}
+
+.offerText {
+  margin: 0 0 12px 0;
+  line-height: 1.45;
+}
+
+.offerPrice {
+  margin: 0 0 12px 0;
+}
+
+.bookBtn {
+  background-color: #F29090;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 5px;
+}
+
+/* Add comment section (below Zakazi) */
+.addCommentSection {
+  margin-top: 100px;
+}
+
+.commentForm {
+  background: #E86868;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  border-radius: 20px;
+  width: 300px;
+}
+
+.textarea {
+  padding: 8px;
+  border: none;
+  outline: none;
+  background: #F29090;
+  resize: vertical;
+}
+
+/* row for stars and send button */
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* star selector buttons */
+.starsSelector {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.starBtn,
+.starBtnActive {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 4px;
+}
+
+/* inactive star */
+.starBtn {
+  color: #c7c7c7;
+}
+
+/* active star */
+.starBtnActive {
+  color: #ffb400;
+}
+
+/* send button */
+.sendBtn {
+  background-color: #F29090;
+  border-radius: 20px;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* COMMENTS LIST: scrollable if needed */
+.commentsList {
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 6px;
+  box-sizing: border-box;
+  width: 100%; /* makes list fit its parent (300px) */
+}
+
+/* single comment: rounded background and small gap between comments */
+.comment {
+  display: flex;
+  gap: 12px;
+  background: #E86868;
+  padding: 10px;
+  border-radius: 8px; /* comments have radius */
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* avatar image on left of comment (no border-radius for images requested -> we keep it 0) */
+.commentAvatar {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 0; /* explicitly no radius on images (but comment container has radius) */
+}
+
+/* right side of comment: stacked vertically */
+.commentRight {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+/* top row: name and date */
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
   align-items: center;
 }
 
-.profileTitle {
-  font-size: 32px;
-  font-weight: bold;
-  color: black;
-  font-family: 'Roboto Serif', serif;
-  margin-bottom: 20px;
+.commentName {
+  font-weight: 700;
 }
 
-.profilePhoto {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  margin-bottom: 10px;
+.commentDate {
+  font-size: 0.75rem;
+  color: #666;
 }
 
-.profileDetails {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
+/* stars for a comment */
+.starsRow {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: #ffb400; /* gold color for filled */
 }
 
-.detailLabels {
-  font-size: 32px;
-  font-weight: bold;
-  font-family: 'Roboto', sans-serif;
-  text-align: right;
-  padding-right: 20px;
+/* we use two classes to style filled/empty stars */
+.starFilled {
+  color: #ffb400;
+  margin-right: 2px;
 }
 
-.detailLabels p {
-  margin-bottom: 10px;
+.starEmpty {
+  color: #c7c7c7;
+  margin-right: 2px;
 }
 
-.detailValues {
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+/* comment text */
+.commentText {
+  font-size: 0.95rem;
+  color: #222;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
 }
 
-.detailValues input {
-  border-radius: 20px;
-  margin-bottom: 8px;
-  margin-top: 4px;
-  padding: 4px;
-  border: 1px solid #ccc;
-  font-size: 20px;
-  font-weight: bold;
-  color: black;
-  background-color: #FCE3AC;
-  text-align: center;
-  width: 200px;
+/* no comments message */
+.noComments {
+  color: #333;
+  font-style: italic;
 }
 
-.profileActions {
-  margin-top: 40px;
-  margin-left: 80px;
-  display: flex;
-  gap: 50px;
-}
+/* RESPONSIVE: stack on smaller screens */
+@media (max-width: 980px) {
+  .contentRow {
+    flex-direction: column;
+  }
 
-.btn {
-  background-color: #BB271A;
-  color: white;
-  border-radius: 30px;
-  border: none;
-  width: 160px;
-  height: 50px;
-  font-weight: bold;
-  font-size: 20px;
-  cursor: pointer;
+  .leftColumn,
+  .centerColumn,
+  .rightColumn {
+    flex: 1 1 100%;
+  }
+
+  .rightColumn {
+    order: 3;
+  }
 }

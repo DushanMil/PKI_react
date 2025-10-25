@@ -11,6 +11,7 @@ const OffersPage = () => {
   const offersPerPage = 3;
 
   const [offerVisible, setOfferVisible] = useState(false);
+  const [selectedOffer, setSelectedOffer] = useState<EventItem>();
 
   useEffect(() => {
     // Load offers from localStorage
@@ -38,22 +39,29 @@ const OffersPage = () => {
   };
 
   function toggleOffer() {
+      // Load offers from localStorage
+      if (typeof window !== "undefined") {
+        const stored = localStorage.getItem("offers");
+        if (stored) {
+          setOffers(JSON.parse(stored));
+        }
+      }
       setOfferVisible(!offerVisible);
   }
 
   const handleOfferClick = (offer: EventItem) => {
     console.log("Clicked offer:", offer.title);
     // View the selected offer. This will visualise the new component
+    setSelectedOffer(offer)
     setOfferVisible(!offerVisible)
-    // set the selected offer to the localstorage
-    localStorage.setItem("selectedOffer", JSON.stringify(offer))
+    
 
   };
 
   return (
     <div className={styles.container}>
       { <Menu/> }
-      <div className={styles.main}>
+      {! offerVisible && <div className={styles.main}>
         <div className={styles.offersContainer}>
           {visibleOffers.map((offer, index) => (
             <div
@@ -93,9 +101,9 @@ const OffersPage = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div>}
 
-      {offerVisible && <OfferPannel onToggleOffer={toggleOffer}/> }
+      {offerVisible && <OfferPannel offer={selectedOffer} onToggleOffer={toggleOffer}/> }
     </div>
   );
 };
