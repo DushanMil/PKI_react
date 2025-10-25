@@ -2,6 +2,7 @@
 import { useEffect, useState, useMemo } from "react";
 import styles from "./OfferPanel.module.css";
 import { useRouter } from "next/navigation";
+import { Calendar, Users } from 'lucide-react'; // icon library
 
 interface OfferPanelProps {
   onToggleOffer: () => void;
@@ -29,6 +30,11 @@ export default function OfferPannel({ onToggleOffer, offer }: OfferPanelProps) {
   const [commentText, setCommentText] = useState('');
   const [rating, setRating] = useState<number>(5);
   // const commentsRef = useRef<HTMLDivElement | null>(null);
+
+  // Form for booking an offer
+  const [showModal, setShowModal] = useState(false);
+  const [guests, setGuests] = useState<number>(0);
+  const [date, setDate] = useState<string>('');
 
   useEffect(() => {
     // Get user data from localStorage
@@ -112,6 +118,31 @@ export default function OfferPannel({ onToggleOffer, offer }: OfferPanelProps) {
     return <div className={styles.container}>Loading...</div>;
   }
 
+  // Booking an offer
+  const handleConfirm = () => {
+    if (!guests || !date) {
+      alert('Molimo popunite sva polja.');
+      return;
+    }
+
+    const booking = {
+      username: username,
+      location: offer.location,
+      guests: guests,
+      title: offer.title,
+      image: offer.image,
+      date: date,
+      state: ""
+    };
+
+    // Save to localStorage
+    const existing = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
+    localStorage.setItem('shoppingCart', JSON.stringify([...existing, booking]));
+
+    alert('Zakazivanje uspešno dodato u korpu!');
+    setShowModal(false);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.headerRow}>
@@ -132,7 +163,7 @@ export default function OfferPannel({ onToggleOffer, offer }: OfferPanelProps) {
           <div className={styles.offerBody}>
             <p className={styles.offerText}>{localOffer.text}</p>
             <p className={styles.offerPrice}>Cena: <strong>{localOffer.price}€</strong> po osobi</p>
-            <button className={styles.bookBtn} onClick={() => alert('Zakazano!')}>
+            <button className={styles.bookBtn} onClick={() => setShowModal(true)}>
               Zakazi
             </button>
           </div>
@@ -192,6 +223,64 @@ export default function OfferPannel({ onToggleOffer, offer }: OfferPanelProps) {
           </div>
         </div>
       </div>
+
+      {/* Modal Overlay */}
+      {showModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h2 className={styles.modalTitle}>Zakazivanje događaja</h2>
+
+            <div className={styles.formRow}>
+              <div className={styles.legendColumn}>
+                <label>Odabrani događaj:</label>
+              </div>
+              <div className={styles.inputColumn}>
+                <p className={styles.eventTitle}>{offer.title}</p>
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <div className={styles.legendColumn}>
+                <Users className={styles.icon} />
+                <label>Broj zvanica:</label>
+              </div>
+              <div className={styles.inputColumn}>
+                <input
+                  type="number"
+                  value={guests}
+                  onChange={(e) => setGuests(Number(e.target.value))}
+                  className={styles.input}
+                  min={1}
+                />
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <div className={styles.legendColumn}>
+                <Calendar className={styles.icon} />
+                <label>Datum:</label>
+              </div>
+              <div className={styles.inputColumn}>
+                <input
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className={styles.input}
+                />
+              </div>
+            </div>
+
+            <div className={styles.modalButtons}>
+              <button className={styles.confirmBtn} onClick={handleConfirm}>
+                Potvrdi
+              </button>
+              <button className={styles.cancelBtn} onClick={() => setShowModal(false)}>
+                Nazad
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

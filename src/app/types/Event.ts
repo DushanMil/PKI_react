@@ -13,6 +13,7 @@ interface EventItem {
   price: string;
   image: string;
   icon: string;
+  location: string;
   comments: CommentItem[];
 
   [Symbol.iterator](): Iterator<any>;

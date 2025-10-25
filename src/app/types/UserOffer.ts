@@ -5,6 +5,7 @@ interface ShoppingCartItem {
   guests: string;
   title: string;
   image: string;
+  date: string;
   state: string; // can be an empty string or "confirmed"
 
   [Symbol.iterator](): Iterator<any>;

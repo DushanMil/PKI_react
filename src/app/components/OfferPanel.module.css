@@ -287,3 +287,101 @@
     order: 3;
   }
 }
+
+
+/* Gray overlay covering the whole page */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(40, 40, 40, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* White modal box */
+.modalContent {
+  background: #E0A82F;
+  padding: 24px;
+  border-radius: 12px;
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.modalTitle {
+  margin-bottom: 8px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Two-column layout for each row */
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.legendColumn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 45%;
+  font-weight: 500;
+  font-weight: bold;
+}
+
+.inputColumn {
+  flex: 0 0 55%;
+}
+
+.eventTitle {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Input fields */
+.input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #F29090;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #F29090;
+}
+
+.icon {
+  color: #666;
+  width: 18px;
+  height: 18px;
+}
+
+/* Centered buttons at bottom */
+.modalButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+  margin-top: 20px;
+}
+
+.confirmBtn, .cancelBtn {
+  background-color: #BB271A;
+  color: white;
+  border: none;
+  padding: 8px 30px;
+  border-radius: 20px;
+  cursor: pointer;
+}
