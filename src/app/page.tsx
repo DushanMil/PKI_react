@@ -12,12 +12,14 @@ export default function LoginPage() {
 
   let initialUsers = [
     { username: "dusan", password: "delecar123"},
-    { username: "rados", password: "bajic321" }
+    { username: "rados", password: "bajic321" },
+    { username: "admin", password: "adminic" }
   ]
 
   let initialUserData = [
-    { username: "dusan", password: "delecar123", name: "Dusan", surname: "Milovanovic", address: "Oslobodjenja 7", phone: "063 17 300 22" },
-    { username: "rados", password: "bajic321", name: "Rados", surname: "Bajic", address: "Kukljin bb", phone: "067 804 557" }
+    { username: "dusan", password: "delecar123", type: "user", name: "Dusan", surname: "Milovanovic", address: "Oslobodjenja 7", phone: "063 17 300 22" },
+    { username: "rados", password: "bajic321", type: "user", name: "Rados", surname: "Bajic", address: "Kukljin bb", phone: "067 804 557" },
+    { username: "admin", password: "adminic", type: "admin", name: "Admin", surname: "Adminic", address: "Supervizorska 44", phone: "062 9630 8888" }
   ]
   let initialNotifications = [
     { username: "dusan", title: "Novo u Kafani kod Španca:", message: "Uz prethodno organizovane dve proslave trecu dobijate gratis", image: "bag.png" },
@@ -55,7 +57,7 @@ export default function LoginPage() {
       price: "50", image: "veridba_carousel.jpg", icon: "party.png", location: "Plaza", comments: []},
   ]
   const [users, setUsers] = useState([]);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState<UserData[]>([]);
 
   const router = useRouter();
 
@@ -108,7 +110,22 @@ export default function LoginPage() {
       localStorage.setItem("username", username);
       localStorage.setItem("loggedInUserDetails", JSON.stringify(userDetails));
 
-      router.push("/userHome");
+      if (userDetails.type == "user") {
+        router.push("/userHome");
+      }
+      else if (userDetails.type == "admin") {
+        router.push("/adminHome");
+      }
+      else {
+        Swal.fire({
+          text: "Invalid user type.",
+          icon: "error",
+          iconColor: "red",
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+      }
 
     } else {
         Swal.fire({

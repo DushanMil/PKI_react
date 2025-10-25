@@ -6,7 +6,7 @@ interface ShoppingCartItem {
   title: string;
   image: string;
   date: string;
-  state: string; // can be an empty string or "confirmed"
+  state: string; // can be an empty string, "confirmed" or "accepted"
 
   [Symbol.iterator](): Iterator<any>;
 }

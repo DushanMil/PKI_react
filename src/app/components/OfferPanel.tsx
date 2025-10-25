@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import styles from "./OfferPanel.module.css";
 import { useRouter } from "next/navigation";
 import { Calendar, Users } from 'lucide-react'; // icon library
+import Swal from "sweetalert2";
 
 interface OfferPanelProps {
   onToggleOffer: () => void;
@@ -14,14 +15,7 @@ export default function OfferPannel({ onToggleOffer, offer }: OfferPanelProps) {
   // It's overlaid on top of other page elements
   // User can add comments and make an appointment for the offer
 
-  const [userDetails, setUserDetails] = useState({
-    username: "",
-    password: "",
-    name: "",
-    surname: "",
-    address: "",
-    phone: ""
-  })
+  const [userDetails, setUserDetails] = useState<UserData>()
   const [offers, setOffers] = useState<EventItem[]>([]);
   const [username, setUsername] = useState("");
   const [localOffer, setLocalOffer] = useState<EventItem>(offer);
@@ -121,7 +115,14 @@ export default function OfferPannel({ onToggleOffer, offer }: OfferPanelProps) {
   // Booking an offer
   const handleConfirm = () => {
     if (!guests || !date) {
-      alert('Molimo popunite sva polja.');
+      Swal.fire({
+        text: "Popunite sva polja.",
+        icon: "warning",
+        iconColor: "#959595",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
       return;
     }
 
@@ -139,7 +140,14 @@ export default function OfferPannel({ onToggleOffer, offer }: OfferPanelProps) {
     const existing = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
     localStorage.setItem('shoppingCart', JSON.stringify([...existing, booking]));
 
-    alert('Zakazivanje uspešno dodato u korpu!');
+    Swal.fire({
+      text: "Događaj dodat u korpu.",
+      icon: "success",
+      iconColor: "green",
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: false
+    });
     setShowModal(false);
   };
 

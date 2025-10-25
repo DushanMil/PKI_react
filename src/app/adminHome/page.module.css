@@ -1,0 +1,120 @@
+.container {
+  min-height: 100vh;
+  background-color: #DBF9FE; /* light yellow background */
+  padding: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* TOP BAR */
+.topBar {
+  background-color: #E0A82F;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  box-sizing: border-box;
+}
+
+.icon {
+  position: relative;
+  cursor: pointer;
+  font-size: 30px;
+  color: #b30000;
+}
+
+.barTitle {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+  flex: 1;
+}
+
+.addButton {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.2s;
+}
+
+.addButton:hover {
+  color: #5a2e00;
+}
+
+/* MAIN LIST */
+.listContainer {
+  display: flex;
+  flex-direction: column; /* stack items vertically */
+  align-items: center; /* center horizontally */
+  padding: 30px 0; /* optional top/bottom padding */
+  min-height: calc(100vh - 60px); /* subtract top bar height if needed */
+  gap: 5px; /* space between items */
+}
+
+.noEvents {
+  text-align: center;
+  font-style: italic;
+  color: #444;
+}
+
+.eventItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: #E0A82F;
+  margin-bottom: 10px;
+  padding: 16px;
+  padding-bottom: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+  width: 450;
+}
+
+/* Columns layout */
+.legendColumn {
+  flex: 0 0 25%;
+  font-weight: bold;
+  text-align: left;
+  color: black;
+}
+
+.valueColumn {
+  flex: 0 0 40%;
+  text-align: right;
+  color: black;
+  font-weight: bold;
+}
+
+.legendColumn p, .valueColumn p {
+  margin-bottom: 5px;
+}
+
+.buttonsColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  gap: 20px;
+}
+
+/* Buttons */
+.actionButton {
+  background-color: #BB271A;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.actionButton:hover {
+  background-color: #e63b3b;
+}
