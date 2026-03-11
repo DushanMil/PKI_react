@@ -45,6 +45,11 @@
   font-weight: bold;
 }
 
+.complaintBikeId {
+  margin: 0;
+  font-weight: bold;
+}
+
 .actionRow {
   display: flex;
   gap: 12px;

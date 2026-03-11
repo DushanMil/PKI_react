@@ -4,6 +4,6 @@ export type UserData = {
   type: string;
   name: string;
   surname: string;
-  address: string;
+  email: string;
   phone: string;
 };

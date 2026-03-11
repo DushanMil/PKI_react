@@ -21,9 +21,9 @@ export default function LoginPage() {
   ]
 
   let initialUserData = [
-    { username: "dusan", password: "delecar123", type: "admin", name: "Dusan", surname: "Milovanovic", address: "Oslobodjenja 7", phone: "063 17 300 22" },
-    { username: "rados", password: "bajic321", type: "admin", name: "Rados", surname: "Bajic", address: "Kukljin bb", phone: "067 804 557" },
-    { username: "admin", password: "adminic", type: "admin", name: "Admin", surname: "Adminic", address: "Supervizorska 44", phone: "062 9630 8888" }
+    { username: "dusan", password: "delecar123", type: "admin", name: "Dusan", surname: "Milovanovic", email: "dusan@example.com", phone: "063 17 300 22" },
+    { username: "rados", password: "bajic321", type: "admin", name: "Rados", surname: "Bajic", email: "rados@example.com", phone: "067 804 557" },
+    { username: "admin", password: "adminic", type: "admin", name: "Admin", surname: "Adminic", email: "admin@example.com", phone: "062 9630 8888" }
   ]
   let initialBikes: Bike[] = [
     {
@@ -131,7 +131,7 @@ export default function LoginPage() {
     {
       id: "C-1003",
       bikeId: "BK-1004",
-      description: "Kocnice skripaju i slabije hvataju.",
+      description: "Kocnice skripe i slabije koce.",
       pictureUrl: "/complaints_pictures/complaint-3.jpg",
       status: "In progress",
     },
@@ -194,6 +194,20 @@ export default function LoginPage() {
 
       const userDetails = userData.find(user => user.username === username && user.password === password);
 
+      if (!localStorage.getItem("bikes")) {
+        localStorage.setItem("bikes", JSON.stringify(initialBikes));
+      }
+
+      if (!localStorage.getItem("rents")) {
+        localStorage.setItem("rents", JSON.stringify(initialRents));
+      }
+
+      if (!localStorage.getItem("complaints")) {
+        localStorage.setItem("complaints", JSON.stringify(initialComplaints));
+      }
+
+      localStorage.setItem("users", JSON.stringify(users));
+      localStorage.setItem("userData", JSON.stringify(userData));
       localStorage.setItem("username", username);
       localStorage.setItem("loggedInUserDetails", JSON.stringify(userDetails));
 

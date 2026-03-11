@@ -1,43 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import adminStyles from '../adminHome/page.module.css';
 import styles from './page.module.css';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import ProfilePanel from '../components/ProfilePanel';
-import AdminMenu from '../components/AdminMenu';
+import Image from 'next/image';
+import TopBar from '../components/TopBar';
 import type { Rent, RentStatus } from '../types/Rent';
 import type { UserData } from '../types/UserData';
 
 export default function IznajmljivanjaPage() {
   const [userDetailsVisible, setUserDetailsVisible] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [rents, setRents] = useState<Rent[]>([]);
   const [selectedRent, setSelectedRent] = useState<Rent | null>(null);
   const [users, setUsers] = useState<UserData[]>([]);
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
-  const [selectedUserEmail, setSelectedUserEmail] = useState<string>('');
-  const router = useRouter();
-
-  function toggleUserDetails() {
-    setUserDetailsVisible(!userDetailsVisible);
-  }
-
-  function logout() {
-    localStorage.removeItem('username');
-    localStorage.removeItem('loggedInUserDetails');
-    router.push('/');
-  }
-
-  function toggleMenu() {
-    setMenuOpen((prev) => !prev);
-  }
-
-  function handleMenuNavigation(path: string) {
-    setMenuOpen(false);
-    router.push(path);
-  }
 
   useEffect(() => {
     if (localStorage.getItem('rents')) {
@@ -69,38 +45,15 @@ export default function IznajmljivanjaPage() {
     return `${day}.${month}.${year} ${hours}:${minutes}`;
   }
 
-  function getStatusLabel(status: RentStatus) {
-    return status === 'inProgress' ? 'U toku' : 'Zavrseno';
-  }
 
   function handleUserClick(username: string) {
     const user = users.find((item) => item.username === username) ?? null;
     setSelectedUser(user);
-    if (user) {
-      setSelectedUserEmail(`${user.username}@example.com`);
-    } else {
-      setSelectedUserEmail('');
-    }
   }
 
   return (
     <div className={styles.container}>
-      <div className={adminStyles.topBar}>
-        <AdminMenu
-          isOpen={menuOpen}
-          onToggle={toggleMenu}
-          onNavigate={handleMenuNavigation}
-        />
-        <h1 className={adminStyles.barTitle}>Rent-a-Bike</h1>
-        <div className={adminStyles.rightGroup}>
-          <span className={adminStyles.icon} onClick={toggleUserDetails}>
-            <Image src="/Test Account.png" alt="Test Account" width={50} height={50} />
-          </span>
-          <span className={adminStyles.icon} onClick={logout}>
-            <Image src="/logout.png" alt="Logout" width={50} height={50} />
-          </span>
-        </div>
-      </div>
+      <TopBar title="Rent-a-Bike" setUserDetailsVisible={setUserDetailsVisible} />
 
       <div className={styles.contentArea}>
         <div className={styles.listWrapper}>
@@ -161,7 +114,9 @@ export default function IznajmljivanjaPage() {
         </div>
       </div>
 
-      {userDetailsVisible && <ProfilePanel onToggleUserDetails={toggleUserDetails} />}
+      {userDetailsVisible && (
+        <ProfilePanel onToggleUserDetails={() => setUserDetailsVisible((prev) => !prev)} />
+      )}
       {selectedRent?.pictureUrl && (
         <div className={styles.imageModalContainer}>
           <div className={styles.imageOverlay} onClick={() => setSelectedRent(null)} />
@@ -196,7 +151,7 @@ export default function IznajmljivanjaPage() {
               </div>
               <div className={styles.userRow}>
                 <span className={styles.userLabel}>Email adresa:</span>
-                <span className={styles.userValue}>{selectedUserEmail}</span>
+                <span className={styles.userValue}>{selectedUser.email}</span>
               </div>
             </div>
           </div>

@@ -20,7 +20,7 @@ export default function ProfilePanel({ onToggleUserDetails }: { onToggleUserDeta
     password: "",
     name: "",
     surname: "",
-    address: "",
+    email: "",
     phone: ""
   });
 
@@ -31,7 +31,15 @@ export default function ProfilePanel({ onToggleUserDetails }: { onToggleUserDeta
       setUsers(JSON.parse(localStorage.getItem("users")));
       setUserData(JSON.parse(localStorage.getItem("userData")));
       setUsername(localStorage.getItem("username"));
-      setUserDetails(JSON.parse(localStorage.getItem("loggedInUserDetails")));
+      const storedDetails = JSON.parse(localStorage.getItem("loggedInUserDetails"));
+      setUserDetails({
+        username: storedDetails?.username ?? "",
+        password: storedDetails?.password ?? "",
+        name: storedDetails?.name ?? "",
+        surname: storedDetails?.surname ?? "",
+        email: storedDetails?.email ?? "",
+        phone: storedDetails?.phone ?? "",
+      });
     }
   }, []);
   
@@ -77,20 +85,41 @@ export default function ProfilePanel({ onToggleUserDetails }: { onToggleUserDeta
           </div>
         </div>
         <div className={styles.profileDetails}>
-          <div className={styles.detailLabels}>
-            <p>Ime:</p>
-            <p>Prezime:</p>
-            <p>Telefon:</p>
-            <p>Adresa:</p>
-            <p>Korisničko ime:</p>
-          </div>
-          <div className={styles.detailValues}>
-            <input type="text" value={userDetails.name} onChange={(e) => changeUserAttribute("name", e.target.value)} />
-            <input type="text" value={userDetails.surname} onChange={(e) => changeUserAttribute("surname", e.target.value)} />
-            <input type="text" value={userDetails.phone} onChange={(e) => changeUserAttribute("phone", e.target.value)} />
-            <input type="text" value={userDetails.address} onChange={(e) => changeUserAttribute("address", e.target.value)} />
-            <input type="text" value={userDetails.username} onChange={(e) => changeUserAttribute("username", e.target.value)} />
-          </div>
+          <label className={styles.detailLabel}>Ime:</label>
+          <input
+            className={styles.detailInput}
+            type="text"
+            value={userDetails.name}
+            onChange={(e) => changeUserAttribute("name", e.target.value)}
+          />
+          <label className={styles.detailLabel}>Prezime:</label>
+          <input
+            className={styles.detailInput}
+            type="text"
+            value={userDetails.surname}
+            onChange={(e) => changeUserAttribute("surname", e.target.value)}
+          />
+          <label className={styles.detailLabel}>Telefon:</label>
+          <input
+            className={styles.detailInput}
+            type="text"
+            value={userDetails.phone}
+            onChange={(e) => changeUserAttribute("phone", e.target.value)}
+          />
+          <label className={styles.detailLabel}>Email adresa:</label>
+          <input
+            className={styles.detailInput}
+            type="text"
+            value={userDetails.email ?? ""}
+            onChange={(e) => changeUserAttribute("email", e.target.value)}
+          />
+          <label className={styles.detailLabel}>Korisničko ime:</label>
+          <input
+            className={styles.detailInput}
+            type="text"
+            value={userDetails.username}
+            onChange={(e) => changeUserAttribute("username", e.target.value)}
+          />
         </div>
 
         <div className={styles.profileActions}>

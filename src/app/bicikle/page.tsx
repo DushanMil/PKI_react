@@ -1,12 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import adminStyles from '../adminHome/page.module.css';
 import styles from './page.module.css';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import ProfilePanel from '../components/ProfilePanel';
-import AdminMenu from '../components/AdminMenu';
+import TopBar from '../components/TopBar';
 import BikeList from './components/BikeList';
 import AddBike from './components/AddBike';
 import EditBikeModal from './components/EditBikeModal';
@@ -14,12 +11,11 @@ import type { Bike } from '../types/Bike';
 
 export default function BiciklePage() {
   const [userDetailsVisible, setUserDetailsVisible] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'list' | 'add'>('list');
   const [bikes, setBikes] = useState<Bike[]>([]);
   const [editingBike, setEditingBike] = useState<Bike | null>(null);
   const [editingBikeId, setEditingBikeId] = useState<string | null>(null);
-  const router = useRouter();
+  const [bikesLoaded, setBikesLoaded] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('bikes')) {
@@ -27,32 +23,15 @@ export default function BiciklePage() {
     } else {
       setBikes([]);
     }
+    setBikesLoaded(true);
   }, []);
 
   useEffect(() => {
-    if (bikes.length > 0) {
+    if (bikesLoaded) {
       localStorage.setItem('bikes', JSON.stringify(bikes));
     }
-  }, [bikes]);
+  }, [bikes, bikesLoaded]);
 
-  function toggleUserDetails() {
-    setUserDetailsVisible(!userDetailsVisible);
-  }
-
-  function logout() {
-    localStorage.removeItem('username');
-    localStorage.removeItem('loggedInUserDetails');
-    router.push('/');
-  }
-
-  function toggleMenu() {
-    setMenuOpen((prev) => !prev);
-  }
-
-  function handleMenuNavigation(path: string) {
-    setMenuOpen(false);
-    router.push(path);
-  }
 
   function handleEditBike(bike: Bike) {
     setEditingBikeId(bike.bikeId);
@@ -73,22 +52,7 @@ export default function BiciklePage() {
 
   return (
     <div className={styles.container}>
-      <div className={adminStyles.topBar}>
-        <AdminMenu
-          isOpen={menuOpen}
-          onToggle={toggleMenu}
-          onNavigate={handleMenuNavigation}
-        />
-        <h1 className={adminStyles.barTitle}>Rent-a-Bike</h1>
-        <div className={adminStyles.rightGroup}>
-          <span className={adminStyles.icon} onClick={toggleUserDetails}>
-            <Image src="/Test Account.png" alt="Test Account" width={50} height={50} />
-          </span>
-          <span className={adminStyles.icon} onClick={logout}>
-            <Image src="/logout.png" alt="Logout" width={50} height={50} />
-          </span>
-        </div>
-      </div>
+      <TopBar title="Rent-a-Bike" setUserDetailsVisible={setUserDetailsVisible} />
 
       <div className={styles.secondaryBar}>
         <button
@@ -115,7 +79,9 @@ export default function BiciklePage() {
         )}
       </div>
 
-      {userDetailsVisible && <ProfilePanel onToggleUserDetails={toggleUserDetails} />}
+      {userDetailsVisible && (
+        <ProfilePanel onToggleUserDetails={() => setUserDetailsVisible((prev) => !prev)} />
+      )}
       {editingBike && (
         <EditBikeModal bike={editingBike} onSave={handleSaveBike} onClose={handleCloseEdit} />
       )}
