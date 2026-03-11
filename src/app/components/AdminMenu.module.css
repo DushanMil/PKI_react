@@ -1,0 +1,61 @@
+.menuWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 80px;
+  justify-self: start;
+}
+
+.menuButton {
+  width: 42px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menuLine {
+  width: 22px;
+  height: 3px;
+  background-color: black;
+  border-radius: 2px;
+}
+
+.menuDropdown {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  background: #E0A82F;
+  border-radius: 0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  padding: 0;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+}
+
+.menuItem {
+  background: transparent;
+  color: black;
+  border: none;
+  padding: 10px 14px;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menuItem + .menuItem {
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.menuItem:hover {
+  background-color: #f1c75a;
+}

@@ -1,0 +1,13 @@
+.container {
+  min-height: 100vh;
+  background-color: #DBF9FE;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.pageMessage {
+  text-align: center;
+  font-style: italic;
+  color: #444;
+}

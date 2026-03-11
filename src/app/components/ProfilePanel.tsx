@@ -60,7 +60,7 @@ export default function ProfilePanel({ onToggleUserDetails }: { onToggleUserDeta
     localStorage.setItem("loggedInUserDetails", JSON.stringify(userDetails));
     localStorage.setItem("username", username);
     
-    router.push("/userHome");
+    onToggleUserDetails();
   }
 
   return (

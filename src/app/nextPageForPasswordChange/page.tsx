@@ -29,7 +29,7 @@ export default function NextPageForPasswordChange() {
 
   const router = useRouter();
 
-  function changePassword(e) {
+  async function changePassword(e) {
     // clear all items in the content array
     setContent([]);
 
@@ -75,6 +75,9 @@ export default function NextPageForPasswordChange() {
     
     setContent((prev) => [...prev, "Bar 10 karaktera!"]);
     setContent((prev) => [...prev, "Uspesno promenjena lozinka!"]);
+
+    // wait 1 second
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     router.push("/");
   }
