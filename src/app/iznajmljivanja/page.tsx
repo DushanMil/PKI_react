@@ -5,7 +5,7 @@ import styles from './page.module.css';
 import ProfilePanel from '../components/ProfilePanel';
 import Image from 'next/image';
 import TopBar from '../components/TopBar';
-import type { Rent, RentStatus } from '../types/Rent';
+import type { Rent } from '../types/Rent';
 import type { UserData } from '../types/UserData';
 
 export default function IznajmljivanjaPage() {

@@ -42,8 +42,7 @@ export default function ProfilePanel({ onToggleUserDetails }: { onToggleUserDeta
       });
     }
   }, []);
-  
-  const router = useRouter();
+
 
   function changeUserAttribute(attribute, value) {
     setUserDetails({ ...userDetails, [attribute]: value });
