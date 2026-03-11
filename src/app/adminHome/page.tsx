@@ -116,7 +116,7 @@ export default function AdminPage() {
           onToggle={toggleMenu}
           onNavigate={handleMenuNavigation}
         />
-        <h1 className={styles.barTitle}>Kafana kod Španca</h1>
+        <h1 className={styles.barTitle}>Rent-a-Bike</h1>
         <div className={styles.rightGroup}>
           <span className={styles.icon} onClick={toggleUserDetails}>
               <Image src="/Test Account.png" alt="Test Account" width={50} height={50} />

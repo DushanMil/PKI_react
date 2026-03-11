@@ -42,7 +42,7 @@ export default function LoginPage() {
     }
 
     // Clear all other items in localstorage
-    const keysToKeep = ["users", "userData"];
+    const keysToKeep = ["users", "userData", "bikes"];
     Object.keys(localStorage).forEach((key: string) => {
       if (!keysToKeep.includes(key)) {
         localStorage.removeItem(key);

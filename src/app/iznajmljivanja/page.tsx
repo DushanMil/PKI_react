@@ -40,7 +40,7 @@ export default function IznajmljivanjaPage() {
           onToggle={toggleMenu}
           onNavigate={handleMenuNavigation}
         />
-        <h1 className={adminStyles.barTitle}>Kafana kod Španca</h1>
+        <h1 className={adminStyles.barTitle}>Rent-a-Bike</h1>
         <div className={adminStyles.rightGroup}>
           <span className={adminStyles.icon} onClick={toggleUserDetails}>
             <Image src="/Test Account.png" alt="Test Account" width={50} height={50} />
