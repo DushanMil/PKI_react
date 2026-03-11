@@ -1,3 +1,5 @@
+export type BikeStatus = 'Operating' | 'Repairing' | 'Removed';
+
 export type Bike = {
   bikeId: string;
   bikeType: string;
@@ -6,4 +8,5 @@ export type Bike = {
   longitude: number;
   parkingDistances: number[];
   screenPosition: number[];
+  status: BikeStatus;
 };

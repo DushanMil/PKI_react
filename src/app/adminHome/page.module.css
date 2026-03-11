@@ -113,6 +113,29 @@
   gap: 5px; /* space between items */
 }
 
+.welcomeSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.asciiArt {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 0;
+  color: #000;
+  text-align: center;
+}
+
+.welcomeText {
+  margin-top: 16px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+}
+
 .noEvents {
   text-align: center;
   font-style: italic;

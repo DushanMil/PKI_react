@@ -9,6 +9,18 @@ type BikeListProps = {
 };
 
 export default function BikeList({ bikes, onEdit }: BikeListProps) {
+  function getStatusLabel(status?: Bike['status']) {
+    switch (status) {
+      case 'Repairing':
+        return 'U popravci';
+      case 'Removed':
+        return 'Uklonjen';
+      case 'Operating':
+      default:
+        return 'U sluzbi';
+    }
+  }
+
   return (
     <div className={styles.listWrapper}>
       {bikes.map((bike) => (
@@ -56,6 +68,10 @@ export default function BikeList({ bikes, onEdit }: BikeListProps) {
               <div className={styles.detailRow}>
                 <span className={styles.detailLabel}>Geo. Duzina:</span>
                 <span className={styles.detailValue}>{bike.longitude}</span>
+              </div>
+              <div className={styles.detailRow}>
+                <span className={styles.detailLabel}>Status:</span>
+                <span className={styles.detailValue}>{getStatusLabel(bike.status)}</span>
               </div>
             </div>
           </div>

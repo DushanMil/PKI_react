@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import type { Bike } from "./types/Bike";
 import type { Rent } from "./types/Rent";
+import type { Complaint } from "./types/Complaint";
 import { UserData } from "./types/UserData";
 
 export default function LoginPage() {
@@ -33,6 +34,7 @@ export default function LoginPage() {
       longitude: 20.4489,
       parkingDistances: [0.4, 0.9, 1.2],
       screenPosition: [0.2, 0.3],
+      status: "Operating",
     },
     {
       bikeId: "BK-1002",
@@ -42,6 +44,7 @@ export default function LoginPage() {
       longitude: 20.4606,
       parkingDistances: [0.2, 0.6, 1.1],
       screenPosition: [0.57, 0.32],
+      status: "Operating",
     },
     {
       bikeId: "BK-1003",
@@ -51,6 +54,7 @@ export default function LoginPage() {
       longitude: 20.4176,
       parkingDistances: [0.3, 0.8, 1.5],
       screenPosition: [0.35, 0.55],
+      status: "Operating",
     },
     {
       bikeId: "BK-1004",
@@ -60,6 +64,7 @@ export default function LoginPage() {
       longitude: 20.4811,
       parkingDistances: [0.5, 0.7, 1.0],
       screenPosition: [0.745, 0.55],
+      status: "Operating",
     },
   ];
   let initialRents: Rent[] = [
@@ -108,6 +113,36 @@ export default function LoginPage() {
       pictureUrl: "",
     },
   ];
+  let initialComplaints: Complaint[] = [
+    {
+      id: "C-1001",
+      bikeId: "BK-1002",
+      description: "Lanac je spao tokom voznje i bicikl ne moze da se koristi.",
+      pictureUrl: "/complaints_pictures/complaint-1.jpg",
+      status: "In progress",
+    },
+    {
+      id: "C-1002",
+      bikeId: "BK-1003",
+      description: "Zadnja guma je potpuno prazna.",
+      pictureUrl: "/complaints_pictures/complaint-2.jpg",
+      status: "In progress",
+    },
+    {
+      id: "C-1003",
+      bikeId: "BK-1004",
+      description: "Kocnice skripaju i slabije hvataju.",
+      pictureUrl: "/complaints_pictures/complaint-3.jpg",
+      status: "In progress",
+    },
+    {
+      id: "C-1004",
+      bikeId: "BK-1001",
+      description: "Bicikl ima ostecenje na ramu posle pada.",
+      pictureUrl: "/complaints_pictures/complaint-4.jpg",
+      status: "In progress",
+    },
+  ];
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState<UserData[]>([]);
 
@@ -136,8 +171,12 @@ export default function LoginPage() {
       localStorage.setItem("rents", JSON.stringify(initialRents));
     }
 
+    if (!localStorage.getItem("complaints")) {
+      localStorage.setItem("complaints", JSON.stringify(initialComplaints));
+    }
+
     // Clear all other items in localstorage
-    const keysToKeep = ["users", "userData", "bikes", "rents"];
+    const keysToKeep = ["users", "userData", "bikes", "rents", "complaints"];
     Object.keys(localStorage).forEach((key: string) => {
       if (!keysToKeep.includes(key)) {
         localStorage.removeItem(key);

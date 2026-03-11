@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import styles from '../page.module.css';
-import type { Bike } from '../../types/Bike';
+import type { Bike, BikeStatus } from '../../types/Bike';
 
 type EditBikeModalProps = {
   bike: Bike;
@@ -14,6 +14,7 @@ type BikeFormState = {
   pricePerHour: string;
   latitude: string;
   longitude: string;
+  status: BikeStatus;
 };
 
 export default function EditBikeModal({ bike, onSave, onClose }: EditBikeModalProps) {
@@ -24,6 +25,7 @@ export default function EditBikeModal({ bike, onSave, onClose }: EditBikeModalPr
       pricePerHour: String(bike.pricePerHour),
       latitude: String(bike.latitude),
       longitude: String(bike.longitude),
+      status: bike.status ?? 'Operating',
     }),
     [bike],
   );
@@ -47,6 +49,7 @@ export default function EditBikeModal({ bike, onSave, onClose }: EditBikeModalPr
       { key: 'pricePerHour', label: 'Cena po satu' },
       { key: 'latitude', label: 'Geo. Sirina' },
       { key: 'longitude', label: 'Geo. Duzina' },
+      { key: 'status', label: 'Status' },
     ];
 
     const emptyField = requiredFields.find(
@@ -82,6 +85,7 @@ export default function EditBikeModal({ bike, onSave, onClose }: EditBikeModalPr
       longitude: parseNumber(formData.longitude),
       parkingDistances: bike.parkingDistances,
       screenPosition: bike.screenPosition,
+      status: formData.status,
     };
 
     onSave(updatedBike);
@@ -127,6 +131,17 @@ export default function EditBikeModal({ bike, onSave, onClose }: EditBikeModalPr
             value={formData.longitude}
             onChange={(event) => updateField('longitude', event.target.value)}
           />
+
+          <label className={styles.editLabel}>Status:</label>
+          <select
+            className={styles.editInput}
+            value={formData.status}
+            onChange={(event) => updateField('status', event.target.value as BikeStatus)}
+          >
+            <option value="Operating">U sluzbi</option>
+            <option value="Repairing">U popravci</option>
+            <option value="Removed">Uklonjen</option>
+          </select>
 
         </div>
         {errorMessage && <p className={styles.editError}>{errorMessage}</p>}

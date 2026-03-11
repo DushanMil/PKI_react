@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import styles from '../page.module.css';
-import type { Bike } from '../../types/Bike';
+import type { Bike, BikeStatus } from '../../types/Bike';
 
 type AddBikeProps = {
   bikes: Bike[];
@@ -12,6 +12,7 @@ type BikeFormState = {
   pricePerHour: string;
   latitude: string;
   longitude: string;
+  status: BikeStatus;
 };
 
 function getNextBikeId(bikes: Bike[]) {
@@ -34,6 +35,7 @@ export default function AddBike({ bikes, onAdd }: AddBikeProps) {
     pricePerHour: '',
     latitude: '',
     longitude: '',
+    status: 'Operating',
   });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -53,6 +55,7 @@ export default function AddBike({ bikes, onAdd }: AddBikeProps) {
       { key: 'pricePerHour', label: 'Cena po satu' },
       { key: 'latitude', label: 'Geo. Sirina' },
       { key: 'longitude', label: 'Geo. Duzina' },
+      { key: 'status', label: 'Status' },
     ];
 
     const emptyField = requiredFields.find(
@@ -91,6 +94,7 @@ export default function AddBike({ bikes, onAdd }: AddBikeProps) {
       longitude: parseNumber(formData.longitude),
       parkingDistances: [],
       screenPosition: [],
+      status: formData.status,
     });
 
     setFormData({
@@ -98,6 +102,7 @@ export default function AddBike({ bikes, onAdd }: AddBikeProps) {
       pricePerHour: '',
       latitude: '',
       longitude: '',
+      status: 'Operating',
     });
     setSuccessMessage('Uspesno dodata bicikla');
   }
@@ -140,6 +145,17 @@ export default function AddBike({ bikes, onAdd }: AddBikeProps) {
           value={formData.longitude}
           onChange={(event) => updateField('longitude', event.target.value)}
         />
+
+        <label className={styles.editLabel}>Status:</label>
+        <select
+          className={styles.editInput}
+          value={formData.status}
+          onChange={(event) => updateField('status', event.target.value as BikeStatus)}
+        >
+          <option value="Operating">U sluzbi</option>
+          <option value="Repairing">U popravci</option>
+          <option value="Removed">Uklonjen</option>
+        </select>
       </div>
       {errorMessage && <p className={styles.editError}>{errorMessage}</p>}
       {successMessage && <p className={styles.editSuccess}>{successMessage}</p>}

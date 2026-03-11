@@ -6,7 +6,107 @@
   font-family: Arial, sans-serif;
 }
 
-.pageMessage {
+.contentArea {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0 36px;
+}
+
+.listWrapper {
+  width: min(760px, 92%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.complaintCard {
+  background-color: #E0A82F;
+  border-radius: 16px;
+  padding: 16px 18px;
+  position: relative;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.complaintInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #000;
+  flex: 1;
+}
+
+.complaintDescription {
+  margin: 0;
+  font-weight: bold;
+}
+
+.actionRow {
+  display: flex;
+  gap: 12px;
+}
+
+.actionButton {
+  background-color: #BB271A;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.complaintImageButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.complaintImage {
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.imageModalContainer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  opacity: 0.6;
+}
+
+.imageModalPanel {
+  position: relative;
+  z-index: 21;
+  width: fit-content;
+  max-width: 92%;
+  background-color: transparent;
+  border-radius: 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: none;
+}
+
+.imageModalPanel .complaintImage {
+  border-radius: 16px;
+}
+
+.emptyMessage {
   text-align: center;
   font-style: italic;
   color: #444;
