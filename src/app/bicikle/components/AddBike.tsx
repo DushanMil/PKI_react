@@ -65,6 +65,22 @@ export default function AddBike({ bikes, onAdd }: AddBikeProps) {
       return;
     }
 
+    const numericFields: { key: keyof BikeFormState; label: string }[] = [
+      { key: 'pricePerHour', label: 'Cena po satu' },
+      { key: 'latitude', label: 'Geo. Sirina' },
+      { key: 'longitude', label: 'Geo. Duzina' },
+    ];
+
+    const invalidNumber = numericFields.find((field) =>
+      Number.isNaN(Number(formData[field.key])),
+    );
+
+    if (invalidNumber) {
+      setErrorMessage(`${invalidNumber.label} mora biti validan broj!`);
+      setSuccessMessage('');
+      return;
+    }
+
     setErrorMessage('');
     setSuccessMessage('');
     onAdd({

@@ -12,45 +12,6 @@ import AddBike from './components/AddBike';
 import EditBikeModal from './components/EditBikeModal';
 import type { Bike } from '../types/Bike';
 
-const defaultBikes: Bike[] = [
-  {
-    bikeId: 'BK-1001',
-    bikeType: 'Gradska',
-    pricePerHour: 120,
-    latitude: 44.7866,
-    longitude: 20.4489,
-    parkingDistances: [0.4, 0.9, 1.2],
-    screenPosition: [0.2, 0.3],
-  },
-  {
-    bikeId: 'BK-1002',
-    bikeType: 'Planinska',
-    pricePerHour: 150,
-    latitude: 44.8152,
-    longitude: 20.4606,
-    parkingDistances: [0.2, 0.6, 1.1],
-    screenPosition: [0.57, 0.32],
-  },
-  {
-    bikeId: 'BK-1003',
-    bikeType: 'Elektricna',
-    pricePerHour: 220,
-    latitude: 44.8042,
-    longitude: 20.4176,
-    parkingDistances: [0.3, 0.8, 1.5],
-    screenPosition: [0.35, 0.55],
-  },
-  {
-    bikeId: 'BK-1004',
-    bikeType: 'Gravel',
-    pricePerHour: 180,
-    latitude: 44.7977,
-    longitude: 20.4811,
-    parkingDistances: [0.5, 0.7, 1.0],
-    screenPosition: [0.745, 0.55],
-  },
-];
-
 export default function BiciklePage() {
   const [userDetailsVisible, setUserDetailsVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,8 +25,7 @@ export default function BiciklePage() {
     if (localStorage.getItem('bikes')) {
       setBikes(JSON.parse(localStorage.getItem('bikes') ?? '[]'));
     } else {
-      localStorage.setItem('bikes', JSON.stringify(defaultBikes));
-      setBikes(defaultBikes);
+      setBikes([]);
     }
   }, []);
 

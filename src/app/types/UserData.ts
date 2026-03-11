@@ -1,4 +1,4 @@
-interface UserData {
+export type UserData = {
   username: string;
   password: string;
   type: string;
@@ -6,4 +6,4 @@ interface UserData {
   surname: string;
   address: string;
   phone: string;
-}
+};
